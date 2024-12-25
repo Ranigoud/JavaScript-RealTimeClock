@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Time Clock</title>
+    <style>
+      
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .main_container {
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #clock {
+            font-size: 3em;
+            font-weight: bold;
+            color: #333;
+            background-image: url('images/clock.jpg');
+            background-size: cover;
+            padding: 50px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+       
+        #clock {
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+    </style>
+</head>
+<body onload="realtimeClock()">
+    <div class="main_container">
+        <h1>Real Time Clock</h1>
+        <div id="clock">
+            <!-- Clock time will be updated here -->
+        </div>
+    </div>
+
+    <script>
+        function realtimeClock() {
+            var rtClock = new Date();
+            var hours = rtClock.getHours();
+            var minutes = rtClock.getMinutes();
+            var seconds = rtClock.getSeconds();
+
+            // Add AM and PM 
+            var amPm = (hours < 12) ? "AM" : "PM"; // Ternary operator
+
+            // Convert the hours  to 12-hour format
+            hours = (hours > 12) ? hours - 12 : hours;
+
+            //  hours, minutes, and seconds with leading zeros 
+            hours = ("0" + hours).slice(-2);
+            minutes = ("0" + minutes).slice(-2);
+            seconds = ("0" + seconds).slice(-2);
+
+            // Display the clock
+            document.getElementById("clock").innerHTML =
+                hours + ":" + minutes + ":" + seconds + " " + amPm;
+
+            var t = setTimeout(realtimeClock, 1000);
+        }
+    </script>
+</body>
+</html>
